@@ -1,15 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="infomation"
-        android:textSize="24sp"
-        android:layout_gravity="center"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:fitsSystemWindows="true"
+        android:id="@+id/bg_bing_pic"/>
 
-</LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="false"
+            android:queryHint="输入植物名称"
+
+            android:id="@+id/search_view"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="50dp"
+                android:background="@drawable/buttonstyle"
+                android:text="拍摄照片"
+                android:id="@+id/search_by_take_pic"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="50dp"
+                android:layout_gravity="center"
+                android:background="@drawable/buttonstyle"
+                android:text="相册选取"
+                android:id="@+id/search_by_choose_pic"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</FrameLayout>
