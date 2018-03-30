@@ -1,0 +1,17 @@
+1.网址：www.zw3e.com
+2.百科搜索：www.zw3e.com/bk/s/+搜索内容
+3.搜索列表解析：searchResultElements=document.select("div.zw-list");
+	a.每个搜索结果的element为searchResultElements中的一个;
+	
+	b.某一搜索结果的主要信息集合
+		Elements info=element.select("div.zw-list-map")
+		.select("a[href]");
+		以及
+		Elements briefText=element.select("div.zw-list-msg")
+					.select("p.zw-list-desc");
+	c.该搜索结果的标题(String)：info.attr("title");
+	d.该搜索结果的封面(String)：info.select("img").attr("src");
+	e.该搜索结果的文章地址(String)：info.attr("href");
+	
+	f.该搜索结果的文章简介(String): brief.text();
+					

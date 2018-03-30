@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_margin="10dp"
+    android:background="@drawable/bg_shadow">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_weight="0.8"
+        android:scaleType="fitCenter"
+        android:padding="2dp"
+        android:layout_margin="8dp"
+        android:layout_gravity="center"
+        android:id="@+id/article_brief_pic"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        android:layout_weight="2">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingTop="2dp"
+            android:textSize="14sp"
+            android:text="Title"
+            android:gravity="center"
+            android:id="@+id/article_brief_title"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.5"
+            android:paddingTop="4dp"
+            android:textSize="9sp"
+            android:text="  Testing content."
+            android:gravity="center_vertical"
+            android:id="@+id/article_brief_info"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
