@@ -12,9 +12,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/cp_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/cp_icon_round"
         android:supportsRtl="true"
         android:theme="@style/CoolPotTheme">
         <activity
@@ -40,7 +40,15 @@
         <activity android:name=".infopart.plant.PlantImgResultActivity" />
         <activity android:name=".infopart.article.NameSearchResultActivity" />
         <activity android:name=".infopart.article.PlantArticle" />
-        <activity android:name=".infopart.plant.PlantPediaActivity"></activity>
+        <activity android:name=".infopart.plant.PlantPediaActivity" />
+        <activity android:name=".SplashActivity"
+            android:theme="@style/Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

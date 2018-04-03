@@ -81,7 +81,7 @@ public class MainFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.main_fragment,container,false);
         init();
-        initDataForTest();
+        //initDataForTest();
         Log.e("Bluetooth","true id"+getId());
         return view;
     }

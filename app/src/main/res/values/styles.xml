@@ -20,4 +20,19 @@
         <item name="android:windowBackground">@drawable/dialog</item>
     </style>
 
+    <style name="NoActionBar" >
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Full" parent="NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="Splash" parent="android:Theme">
+        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
 </resources>
