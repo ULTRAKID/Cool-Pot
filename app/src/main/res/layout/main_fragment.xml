@@ -49,40 +49,67 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <CheckBox
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="自动浇水"
-            android:textSize="18sp"
             android:layout_weight="1"
-            android:id="@+id/auto_water_option_check"/>
+            android:orientation="vertical">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="自动浇水"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:id="@+id/auto_water_option_check"/>
 
-        <Button
-            android:layout_width="wrap_content"
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:background="@drawable/circle_btn"
+                android:text="开始浇水"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:id="@+id/water_pot_button"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="开始浇水"
-            android:textSize="18sp"
             android:layout_weight="1"
-            android:id="@+id/water_pot_button"/>
-        
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="开始旋转"
-            android:layout_weight="1"
-            android:textSize="18sp"
-            android:id="@+id/rotate_pot_button"/>
+            android:orientation="vertical">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="自动旋转"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:id="@+id/auto_rotate_option_check"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:background="@drawable/circle_btn"
+                android:text="开始旋转"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:id="@+id/rotate_pot_button"/>
+        </LinearLayout>
 
         <Button
             android:id="@+id/refresh_data_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:layout_weight="0.5"
+            android:layout_margin="20dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:background="@drawable/refresh" />
+
 
     </LinearLayout>
 
@@ -166,5 +193,12 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:id="@+id/lineChart_layout"/>
 
 </LinearLayout>

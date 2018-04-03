@@ -39,7 +39,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:fitsSystemWindows="true"
-            android:background="@mipmap/flowerpot"
+            android:background="@mipmap/flowers_little"
             android:id="@+id/view_pager"/>
 
         <com.ashokvarma.bottomnavigation.BottomNavigationBar

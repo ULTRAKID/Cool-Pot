@@ -8,28 +8,36 @@
     tools:context="com.cwt.coolpot.infopart.plant.PlantPediaActivity">
 
     <ScrollView
+        android:id="@+id/plant_pedia_scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
         android:overScrollMode="never"
-        android:id="@+id/plant_pedia_scrollView">
+        android:scrollbars="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include layout="@layout/name_part"/>
-            <include layout="@layout/images_part"/>
-            <include layout="@layout/mcll_part" />
-            <include layout="@layout/description_part"/>
-            <include layout="@layout/fbdq_part"/>
-            <include layout="@layout/bxtz_part"/>
+            <include layout="@layout/name_part" />
 
-            <include layout="@layout/hksj_part"/>
-            <include layout="@layout/yhjs_part"/>
-            <include layout="@layout/jzgy_part"/>
-            <include layout="@layout/xgsc_part"/>
+            <include layout="@layout/images_part" />
+
+            <include layout="@layout/mcll_part" />
+
+            <include layout="@layout/description_part" />
+
+            <include layout="@layout/fbdq_part" />
+
+            <include layout="@layout/bxtz_part" />
+
+            <include layout="@layout/hksj_part" />
+
+            <include layout="@layout/yhjs_part" />
+
+            <include layout="@layout/jzgy_part" />
+
+            <include layout="@layout/xgsc_part" />
 
         </LinearLayout>
 

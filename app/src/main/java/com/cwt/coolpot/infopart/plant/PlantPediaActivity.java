@@ -20,7 +20,7 @@ public class PlantPediaActivity extends AppCompatActivity {
 
     private PlantPedia.resultBean plantPedia;
     RecyclerView imagesRv;
-    ScrollView scrollView;
+    //ScrollView scrollView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +29,7 @@ public class PlantPediaActivity extends AppCompatActivity {
     }
 
     private void init(){
-        scrollView=(ScrollView)findViewById(R.id.plant_pedia_scrollView);
+        //scrollView=(ScrollView)findViewById(R.id.plant_pedia_scrollView);
         TextView nameStd=(TextView)findViewById(R.id.nameStdPedia_text),
                 familyGenusCn=(TextView)findViewById(R.id.family_genusPedia_text),
                 alias=(TextView)findViewById(R.id.aliasPedia_text),

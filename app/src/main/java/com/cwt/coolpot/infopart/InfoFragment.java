@@ -16,6 +16,7 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
@@ -59,8 +60,8 @@ import okhttp3.Response;
  */
 
 public class InfoFragment extends Fragment{
-    SearchView searchView;ImageView bg_pic;ImageButton imgChoose;Button testRecUI,testPediaUI;
-    SharedPreferences preferences;
+    SearchView searchView;ImageView bg_pic;FloatingActionButton imgChoose;Button testRecUI,testPediaUI;
+    //SharedPreferences preferences;
     View view;
     String img_base64="",rec_result="";
     Plant plant;
@@ -166,7 +167,7 @@ public class InfoFragment extends Fragment{
                 startActivity(intent);
             }
         });
-        imgChoose=(ImageButton)view.findViewById(R.id.search_pic);
+        imgChoose=(FloatingActionButton) view.findViewById(R.id.search_pic);
         imgChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * 蓝牙显示及连接
  * Created by 曹吵吵 on 2017/8/20 0020.
  */
 
@@ -182,6 +183,8 @@ public class ConFragment extends Fragment{
                 switch (intent.getAction()){
                     case BluetoothDevice.ACTION_FOUND:
                         BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                        if (onlineDevices.indexOf(device)!=-1)
+                            return;
                         onlineDevices.add(device);
                         onlineDevicesAdapter.notifyDataSetChanged();
                         Log.e("Bluetooth",device.getName()+ "  数量  "+onlineDevices.size()

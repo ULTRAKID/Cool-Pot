@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -23,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="TestPedia"
+            android:visibility="gone"
             android:id="@+id/testPediaUI_button"/>
 
         <Button
@@ -30,12 +32,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="TestRec"
+            android:visibility="gone"
             android:id="@+id/testRecUI_button"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:padding="15dp"
             android:orientation="horizontal">
 
             <SearchView
@@ -46,29 +50,30 @@
                 android:queryHint="输入植物名称"
                 android:id="@+id/search_view"/>
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:src="@android:drawable/ic_menu_camera"
-                android:id="@+id/search_pic"/>
 
         </LinearLayout>
+
+
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/transparent">
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@android:drawable/ic_menu_camera"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="30dp"
+        app:backgroundTint="#87c5ff"
+        app:rippleColor="#33728dff"
+        app:elevation="10dp"
+        app:pressedTranslationZ="12dp"
+        android:id="@+id/search_pic"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Cool Pot测试版"
-            android:textSize="20sp"
-            android:textColor="#000"
-            android:textStyle="bold"/>
+    <RelativeLayout
+        android:layout_width="279dp"
+        android:layout_height="172dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:background="@mipmap/title">
 
     </RelativeLayout>
 
