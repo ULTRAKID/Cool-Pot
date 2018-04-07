@@ -2,10 +2,10 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item>
-        <!-- 图片 -->
+        <!-- 废弃 -->
         <bitmap
             android:gravity="center"
             android:src="@drawable/flowerpot"
-            android:scaleType="center"/>
+            android:scaleType="fitXY"/>
     </item>
 </layer-list>
