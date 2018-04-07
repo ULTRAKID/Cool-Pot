@@ -1,23 +1,32 @@
 package com.cwt.coolpot.infopart;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.widget.Button;
@@ -43,6 +52,7 @@ import com.cwt.coolpot.infopart.article.NameSearchResultActivity;
 import com.google.gson.Gson;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
@@ -65,7 +75,7 @@ public class InfoFragment extends Fragment{
     View view;
     String img_base64="",rec_result="";
     Plant plant;
-    private String imagepath = "/storage/emulated/0/DCIM/CP ";
+    private String imagepath = "";
     private String imagepath2 = "/storage/emulated/0/DCIM/test_null.jpg";
     private Uri imageUri;
     private Handler handler=null;
@@ -77,6 +87,7 @@ public class InfoFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.info_fragment,container,false);
         init();
+
         //testRecUI.setVisibility(View.INVISIBLE);
         return view;
     }
@@ -96,6 +107,8 @@ public class InfoFragment extends Fragment{
         searchView.setIconifiedByDefault(false);
         searchView.setQueryHint("输入植物名称");
         searchView.setSubmitButtonEnabled(true);
+        searchView.setFocusable(false);
+        searchView.clearFocus();
         int id=searchView.getContext().getResources().getIdentifier("android:id/search_src_text",null,null);
         TextView textView=(TextView)searchView.findViewById(id);
         textView.setTextColor(Color.parseColor("#000000"));
@@ -177,7 +190,7 @@ public class InfoFragment extends Fragment{
                     public void onClick(DialogInterface dialogInterface, int i) {
                         switch (i){
                             case 0:
-                                takePhoto();
+                                applyWritePermission();//7.0以上takePhoto（）需要获取存储权限
                                 break;
                             case 1:
                                 choosePhoto();
@@ -193,15 +206,20 @@ public class InfoFragment extends Fragment{
     }
 
     private void choosePhoto(){
-        Intent intent=new Intent("android.intent.action.GET_CONTENT");
+        Intent intent=new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.setType("image/*");
+        intent.putExtra("crop", true);
         startActivityForResult(intent,CHOOSE_PHOTO);
     }
 
     private void takePhoto(){
         Date now=new Date();
         now.getTime();
-        imagepath="/storage/emulated/0/DCIM/CP ";
+        //imagepath="/storage/emulated/0/DCIM/CP";
+        imagepath=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath();
+        imagepath+="/";
+        Log.e("cp",imagepath);
         imagepath+=now.toString()+".jpg";
         File outputImage=new File(imagepath);
         //File outputImage=new File(view.getContext().getExternalCacheDir(),"plants.jpg");
@@ -252,32 +270,20 @@ public class InfoFragment extends Fragment{
         switch (requestCode){
             case TAKE_PHOTO:
                 if (resultCode== Activity.RESULT_OK) {
-                    state=recognizePlant(imageUri);
+                    state=recognizePlant(imagepath);
                 }
                 break;
             case CHOOSE_PHOTO:
                 if (resultCode== Activity.RESULT_OK){
                     imageUri=data.getData();
-                    state=recognizePlant(imageUri);
+                    imagepath=getFilePathByUri(getContext(),imageUri);
+                    Log.e("Log_CoolPot", imagepath+" ");
+                    state=recognizePlant(imagepath);
                 }
                 break;
         }
         if (state==FAILURE){
-            if (plant!=null){
-                switch (plant.Status){
-                    case 1001:
-                        Toast.makeText(getContext(),Plant.STATUS_1001,Toast.LENGTH_SHORT).show();
-                        break;
-                    case 1002:
-                        Toast.makeText(getContext(),Plant.STATUS_1002,Toast.LENGTH_SHORT).show();
-                        break;
-                    case 1003:
-                        Toast.makeText(getContext(),Plant.STATUS_1003,Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            } else {
-                Toast.makeText(getContext(),"图片上传失败",Toast.LENGTH_SHORT).show();
-            }
+            Toast.makeText(getContext(),"图片拍摄或打开失败",Toast.LENGTH_SHORT).show();
             return;
         }
     }
@@ -318,11 +324,14 @@ public class InfoFragment extends Fragment{
         });
     }
 
-    private int recognizePlant(Uri photoUri){
-        Log.e("data", photoUri.toString());
+    private int recognizePlant(String path){
+        //Log.e("data", photoUri.toString());
         plant=null;
         try {
-            InputStream inputStream = getActivity().getContentResolver().openInputStream(photoUri);
+            //String path=getFilePathByUri(getContext(),photoUri);
+            //Log.e("Log_CoolPot", path+" ");
+            //InputStream inputStream = getActivity().getContentResolver().openInputStream(photoUri);
+            InputStream inputStream =new FileInputStream(path);
             if (inputStream != null) {
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 //Bitmap bitmap=BitmapFactory.decodeFile(imagepath);
@@ -343,6 +352,7 @@ public class InfoFragment extends Fragment{
         } catch (IOException e) {
             img_base64 = "";
             e.printStackTrace();
+            Log.e("Log_CoolPot", "open inputStream failure "+e.getMessage());
             return FAILURE;
         }
         Log.e("Log_CoolPot", "img_base64:\n" + img_base64);
@@ -377,5 +387,55 @@ public class InfoFragment extends Fragment{
         progressDialog.setCancelable(false);
         progressDialog.show();
         return SUCCESS;
+    }
+
+    public void applyWritePermission() {
+        String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        if (Build.VERSION.SDK_INT >= 23) {
+            int check = ContextCompat.checkSelfPermission(getContext(), permissions[0]);
+            if (check == PackageManager.PERMISSION_GRANTED) {
+                takePhoto();
+            } else {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            }
+        } else {
+            takePhoto();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            takePhoto();
+        } else {
+            Toast.makeText(getContext(), "需要存储权限", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static String getFilePathByUri(final Context context, final Uri uri) {
+        if (null == uri)
+            return null;
+        final String scheme = uri.getScheme();
+        String data = null;
+        if (scheme == null)
+            data = uri.getPath();
+        else if (ContentResolver.SCHEME_FILE.equals(scheme)) {
+            data = uri.getPath();
+        } else if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
+            Cursor cursor = context.getContentResolver().query(uri,
+                    new String[] { MediaStore.Images.ImageColumns.DATA }, null, null, null);
+            if (null != cursor) {
+                if (cursor.moveToFirst()) {
+                    int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                    if (index > -1) {
+                        data = cursor.getString(index);
+                    }
+                }
+                cursor.close();
+            }
+        }
+        return data;
     }
 }

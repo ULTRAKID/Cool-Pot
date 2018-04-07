@@ -72,7 +72,7 @@ public class PlantPagerAdapter extends PagerAdapter {
         plantAliasName.setText("别名："+dealStr(plantList.get(position).AliasName));
         plantFamily.setText("科名："+dealStr(plantList.get(position).Family));
         plantGenus.setText("属名："+dealStr(plantList.get(position).Genus));
-        plantScore.setText("可能性："+new DecimalFormat("#.00").format(plantList.get(position).Score)+"%");
+        plantScore.setText("可能性："+new DecimalFormat("0.00").format(plantList.get(position).Score)+"%");
         String url=plantList.get(position).ImageUrl;
         if (url=="")
             Glide.with(resultView.getContext()).load(R.drawable.no_pic).into(plantExamplePic);
