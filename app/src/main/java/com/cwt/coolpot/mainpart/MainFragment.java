@@ -104,7 +104,7 @@ public class MainFragment extends Fragment  {
                 inputStream = btSocket.getInputStream();
                 int len;
                 String result = "";
-                while (isRefreshing) {
+                while (true) {
                     len=inputStream.available();
                     if (len<=0 ) {
                         continue;
@@ -121,6 +121,8 @@ public class MainFragment extends Fragment  {
                             result = MessageString.bytesToHexString(data);
                             result = MessageString.HexAscToString(result);
                             Log.e("单片机蓝牙信息:", "result " + result);
+                            if (!isRefreshing)
+                                continue;
                             Message msg = new Message();
                             msg.what = MESSAGE_READ;
                             msg.obj = result;
@@ -197,7 +199,7 @@ public class MainFragment extends Fragment  {
                             Log.e("单片机蓝牙信息:", "data:" + a);
                         //TODO 蓝牙收到数据之后对信息进行更新
                         stopRefreshAnim();
-                        if (data.length>1) {
+                        if (data.length==2) {
                             String temp=data[0],humidity=data[1].split("%")[0],light=data[1].split("%")[1];
                             light=light.split("lx")[0];
                             int lightN=Integer.valueOf(light);

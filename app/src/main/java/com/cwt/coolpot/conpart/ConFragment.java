@@ -91,6 +91,7 @@ public class ConFragment extends Fragment{
                 if (!hasPermission)
                     ConFragment.this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                             REQUEST_PERMISSION_ACCESS_LOCATION);
+                Log.e("Bluetooth","权限："+checkPermission());
                 searchOnlineDevices();
             }
         });
