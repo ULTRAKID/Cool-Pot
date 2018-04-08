@@ -220,20 +220,18 @@ public class MainFragment extends Fragment  {
                             updateChartData();
                             if (refreshTask!=null)
                                 refreshTask.cancel();
-                            else {
-                                refreshTask=new TimerTask() {
-                                    @Override
-                                    public void run() {
-                                        getActivity().runOnUiThread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                refreshButton.callOnClick();
-                                            }
-                                        });
-                                    }
-                                };
-                                timer.schedule(refreshTask,REFRESH_INTERVAL_TIME);
-                            }
+                            refreshTask=new TimerTask() {
+                                @Override
+                                public void run() {
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            refreshButton.callOnClick();
+                                        }
+                                    });
+                                }
+                            };
+                            timer.schedule(refreshTask,REFRESH_INTERVAL_TIME);
                         }
                         break;
                     case TIME_LIMITED_EXCEEDED:
